@@ -310,26 +310,17 @@
 </div>
 
 <script>
-    // ======== 统计功能配置 ========
-    // 将您刚刚获得的Web App URL粘贴在这里
+    // ======================= 统计功能配置 =======================
     const STATS_API_URL = 'https://script.google.com/macros/s/AKfycbwsx7mRqTTdK6NkoG35qPPvQWrki-0aUvlXmMv44BffiR-SgVg3HLwbkucpn_-ow6lf/exec';
 
-    // 上报统计数据的函数（静默执行，不干扰用户）
     function reportStat(songName) {
         if (!STATS_API_URL) return;
-        // 使用 fetch 发送 GET 请求，?song=歌名
         fetch(`${STATS_API_URL}?song=${encodeURIComponent(songName)}`)
-            .then(response => {
-                // 静默成功，不需要任何提示
-                if (!response.ok) console.log("统计上报响应异常");
-            })
-            .catch(err => {
-                // 静默失败，不影响用户使用
-                console.log("统计上报失败:", err);
-            });
+            .then(response => { if (!response.ok) console.log("统计上报响应异常"); })
+            .catch(err => { console.log("统计上报失败:", err); });
     }
 
-    // ======================= 题目数据 =======================
+    // ======================= 题目数据（根据最新文档） =======================
     const questions = [
         { text: "当你听一首新歌时，你会被什么吸引？", options: [
             { label: "旋律是否流畅动听", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
@@ -359,7 +350,7 @@
             { label: "夜空中让人鼓掌的烟火", vector: { emotional: 0, skill: 2, rhythm: 0, experimental: 0 } },
             { label: "穿林而过的风，叶子沙沙地应和", vector: { emotional: 0, skill: 0, rhythm: 2, experimental: 0 } },
             { label: "一个无人能解的谜题", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 2 } },
-            { label: "深海里那束不知道从哪照进来的光", vector: { emotional: 3, skill: 0, rhythm: 0, experimental: 0 } }
+            { label: "深海里那束不知道从哪照进来的光", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } }
         ] },
         { text: "KTV里你一般点什么歌？", options: [
             { label: "抒情走心慢歌", vector: { emotional: 3, skill: 0, rhythm: -1, experimental: 0 } },
@@ -380,7 +371,7 @@
             { label: "有态度，听完就知道你是谁", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 3 } }
         ] },
         { text: "爱在你的生活中更像是什么？", options: [
-            { label: "像主食，每顿都要有", vector: { emotional: 5, skill: 0, rhythm: -1, experimental: -1 } },
+            { label: "像主食，每顿都要有", vector: { emotional: 5, skill: 0, rhythm: 0, experimental: 0 } },
             { label: "像调料，是生活中浓墨重彩的一笔", vector: { emotional: 3, skill: 0, rhythm: 0, experimental: 0 } },
             { label: "像配菜，有它会丰富，没有也行", vector: { emotional: 1, skill: 0, rhythm: 0, experimental: 0 } },
             { label: "像剩菜，有时候直接倒了", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 0 } }
@@ -388,8 +379,8 @@
         { text: "你最想梦到哪个场景？", options: [
             { label: "一片永远下着雨的海边", vector: { emotional: 3, skill: 0, rhythm: 0, experimental: 0 } },
             { label: "一座突然会唱歌的旧剧院", vector: { emotional: 0, skill: 2, rhythm: 0, experimental: 1 } },
-            { label: "一条华丽的旋转楼梯", vector: { emotional: 0, skill: 0, rhythm: 2, experimental: 0 } },
-            { label: "一个所有颜色都在流动的房间", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 3 } }
+            { label: "一条华丽的旋转楼梯", vector: { emotional: 0, skill: 0, rhythm: 3, experimental: 0 } },
+            { label: "一个所有颜色都在流动的房间", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 2 } }
         ] },
         { text: "难过的时候，你通常会？", options: [
             { label: "一个人待着，慢慢消化", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
@@ -405,15 +396,15 @@
         ] }
     ];
 
-    // ======================= 歌曲数据（最新文案，共47首） =======================
+    // ======================= 歌曲数据（47首，向量和描述已按最新表格更新） =======================
     const songs = [
-        { name: "你的珍藏", emotional: 8, skill: 5, rhythm: 3, experimental: 0.5, desc: "你飞得很高、很远，<br>也值得一个可以永远稳稳接住你的港湾。" },
-        { name: "照片", emotional: 9.5, skill: 4, rhythm: 3, experimental: 1.5, desc: "你拥有着值得你用一生去整理和纪念的东西。<br>这样的人，心里有一座自己的博物馆，<br>不对外开放，但永远亮着灯。" },
-        { name: "在夜里跳舞", emotional: 8, skill: 5, rhythm: 6, experimental: 2, desc: "你太知道爱的分量。<br>你的克制不是冷淡，<br>是你把所有的热情都调成了静音。<br>这样的人，不轻易开始，<br>但开始了就不会结束。" },
-        { name: "爱我的时候（with周兴哲）", emotional: 7, skill: 3, rhythm: 5, experimental: 2, desc: "你像冬天里的一杯热可可，<br>你给的温暖，不是轰轰烈烈，是刚好。<br>刚好在需要的时候出现，刚好让人想靠近。" },
-        { name: "分身", emotional: 10, skill: 5, rhythm: 4, experimental: 2, desc: "你的多面性令人捉摸不透。<br>而你的每一个分身，<br>都是与周遭世界每一次交手的证据。" },
-        { name: "喂", emotional: 6, skill: 6, rhythm: 8, experimental: 3, desc: "你在自己的节奏里晃，不急也不停。<br>你在混乱里找平衡，在热闹里走神。<br>那些高音不是炫技，<br>是你终于找到一个出口，<br>把憋着的那口气吐出来。" },
-        { name: "续写", emotional: 9.5, skill: 5, rhythm: 3, experimental: 0.5, desc: "你不轻易说爱，但说了就不会收回。<br>你看重承诺，<br>看重那些不需要说出口也懂的时刻。" },
+        { name: "你的珍藏", emotional: 8, skill: 5, rhythm: 3, experimental: 3, desc: "你飞得很高、很远，<br>也值得一个可以永远稳稳接住你的港湾。" },
+        { name: "照片", emotional: 9.5, skill: 4, rhythm: 3, experimental: 3, desc: "你拥有着值得你用一生去整理和纪念的东西。<br>这样的人，心里有一座自己的博物馆，<br>不对外开放，但永远亮着灯。" },
+        { name: "在夜里跳舞", emotional: 8, skill: 5, rhythm: 6, experimental: 3, desc: "你太知道爱的分量。<br>你的克制不是冷淡，<br>是你把所有的热情都调成了静音。<br>这样的人，不轻易开始，<br>但开始了就不会结束。" },
+        { name: "爱我的时候（with周兴哲）", emotional: 7, skill: 3, rhythm: 5, experimental: 3, desc: "你像冬天里的一杯热可可，<br>你给的温暖，不是轰轰烈烈，是刚好。<br>刚好在需要的时候出现，刚好让人想靠近。" },
+        { name: "分身", emotional: 10, skill: 5, rhythm: 4, experimental: 3, desc: "你的多面性令人捉摸不透。<br>而你的每一个分身，<br>都是与周遭世界每一次交手的证据。" },
+        { name: "喂", emotional: 6, skill: 6, rhythm: 8, experimental: 4, desc: "你在自己的节奏里晃，不急也不停。<br>你在混乱里找平衡，在热闹里走神。<br>那些高音不是炫技，<br>是你终于找到一个出口，<br>把憋着的那口气吐出来。" },
+        { name: "续写", emotional: 9.5, skill: 5, rhythm: 3, experimental: 2.5, desc: "你不轻易说爱，但说了就不会收回。<br>你看重承诺，<br>看重那些不需要说出口也懂的时刻。" },
         { name: "空耳", emotional: 8, skill: 2, rhythm: 4, experimental: 2, desc: "你习惯在那些无意义的日常里找线索。<br>对着空墙找回声，在沉默里找花开。<br>这样的人，有浪漫的天赋。" },
         { name: "另一种答案", emotional: 4, skill: 5, rhythm: 6, experimental: 4, desc: "你爱人的方式，像一首温柔的R&B，<br>在纷乱的世界中保持着自己的节奏。" },
         { name: "勇敢额度", emotional: 6, skill: 5, rhythm: 4, experimental: 2, desc: "你摔过，但每次都自己爬起来拍掉灰。<br>你比谁都清楚，那条路为什么值得走。" },
@@ -440,11 +431,11 @@
         { name: "假如我们还爱着", emotional: 9, skill: 3, rhythm: 4, experimental: 5, desc: "时间拿不走你的真诚，只是把它藏得更深了。<br>你学会了把一段感情放进抽屉里，<br>不常打开，但你知道它在那里。" },
         { name: "我管不住我自己", emotional: 1, skill: 6, rhythm: 8, experimental: 6, desc: "你身上有一种藏不住的可爱。<br>世界太大，但你总能找到那些亮晶晶的小东西。" },
         { name: "有趣", emotional: 0.5, skill: 10, rhythm: 7, experimental: 10, desc: "你拒绝无聊。<br>人生苦短，必须加点料。<br>你把日子过成了自己的实验剧场。" },
-        { name: "我表示理解", emotional: 1, skill: 5, rhythm: 7, experimental: 8, desc: "你看得太清楚，所以懒得较真。<br>不解释，不辩解。<br>别人争对错的时候，你在看风景。<br>你不赶浪潮，你自己就是海。" },
+        { name: "我表示理解", emotional: 2, skill: 5, rhythm: 7, experimental: 8, desc: "你看得太清楚，所以懒得较真。<br>不解释，不辩解。<br>别人争对错的时候，你在看风景。<br>你不赶浪潮，你自己就是海。" },
         { name: "还你茉莉", emotional: 0.5, skill: 9, rhythm: 5, experimental: 10, desc: "你在有力的鼓点中俯视山川河流，<br>你坚定地张开双臂，允许一切穿过自己。<br>心中有爱，仁者无敌。" },
-        { name: "多少的光阴", emotional: 9, skill: 3, rhythm: 4, experimental: 7, desc: "时间在你身上留下的不是痕迹，是养分。<br>这样的人像潮汐，<br>有自己的时辰，不跟着任何人的表走。" },
+        { name: "多少的光阴", emotional: 9.5, skill: 3, rhythm: 4, experimental: 7, desc: "时间在你身上留下的不是痕迹，是养分。<br>这样的人像潮汐，<br>有自己的时辰，不跟着任何人的表走。" },
         { name: "珠玉", emotional: 7, skill: 10, rhythm: 5, experimental: 10, desc: "你在世事沉浮中坚持着真实的自我。<br>千淘万洗，珠玉自现。" },
-        { name: "执", emotional: 7, skill: 5, rhythm: 3, experimental: 3, desc: "你看透了因果，却还是选了那个因。<br>你清醒地固执，比盲目更难得。" },
+        { name: "执", emotional: 7, skill: 5, rhythm: 3.5, experimental: 3.5, desc: "你看透了因果，却还是选了那个因。<br>你清醒地固执，比盲目更难得。" },
         { name: "纯寐寐", emotional: 2.5, skill: 6, rhythm: 9, experimental: 7.5, desc: "别人在抢拍子，你在等拍子来找你。<br>慵懒的鼓点在你身边绕啊绕，<br>你躺在里面，手指跟着轻轻敲。<br>你眯着眼，世界在你面前慢慢转。" },
         { name: "光波", emotional: 6, skill: 5, rhythm: 7, experimental: 6, desc: "你不是在破碎，你是在蜕壳。<br>壳裂开的时候，光才能照进来。" },
         { name: "君", emotional: 10, skill: 7, rhythm: 4, experimental: 1, desc: "你的成熟超越了年龄。<br>你的安静不是冷漠，<br>是你已经不需要用喧哗来证明自己存在。" },
@@ -472,11 +463,8 @@
 
     function updatePrevButtonStyle() {
         const prevBtn = document.getElementById('prevBtn');
-        if (currentIndex === 0) {
-            prevBtn.classList.add('disabled-btn');
-        } else {
-            prevBtn.classList.remove('disabled-btn');
-        }
+        if (currentIndex === 0) prevBtn.classList.add('disabled-btn');
+        else prevBtn.classList.remove('disabled-btn');
     }
 
     function clearAutoTimer() {
@@ -566,26 +554,19 @@
             }
         }
 
-        let bestSong = null;
-        let minDistance = Infinity;
-        for (const song of songs) {
-            const dist = Math.sqrt(
-                Math.pow(userVector.emotional - song.emotional, 2) +
-                Math.pow(userVector.skill - song.skill, 2) +
-                Math.pow(userVector.rhythm - song.rhythm, 2) +
-                Math.pow(userVector.experimental - song.experimental, 2)
-            );
-            if (dist < minDistance) {
-                minDistance = dist;
-                bestSong = song;
-            }
-        }
-
-        // ========== 上报统计数据（静默） ==========
-        if (bestSong) {
-            reportStat(bestSong.name);
-        }
-
+        // 曼哈顿距离算法（最均衡）
+        let songScores = songs.map(song => {
+            let totalDiff = Math.abs(userVector.emotional - song.emotional) +
+                            Math.abs(userVector.skill - song.skill) +
+                            Math.abs(userVector.rhythm - song.rhythm) +
+                            Math.abs(userVector.experimental - song.experimental);
+            return { song, totalDiff };
+        });
+        songScores.sort((a, b) => a.totalDiff - b.totalDiff);
+        let bestSong = songScores[0].song;
+        
+        if (bestSong) reportStat(bestSong.name);
+        
         const quizView = document.getElementById('quizView');
         const resultView = document.getElementById('resultView');
         quizView.style.display = 'none';
