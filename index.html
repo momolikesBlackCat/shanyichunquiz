@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>测测你是单依纯的哪首歌？</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f7f0fc 0%, #e9def5 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Poppins', 'Helvetica Neue', sans-serif;
+            color: #2e1a3e;
+            padding: 16px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 40px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 20px 20px 30px;
+            width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 1.65rem;
+            letter-spacing: -0.2px;
+            background: linear-gradient(135deg, #6b3e8f, #a86fc9);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 0 4px;
+        }
+
+        .hero h1 .emoji {
+            background: none;
+            -webkit-background-clip: unset;
+            color: #2e1a3e;
+        }
+
+        .hero p {
+            font-size: 0.85rem;
+            color: #4b2e62;
+            background: #ede4f5;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        .progress-area {
+            margin: 16px 0 12px;
+        }
+
+        .progress-bar-bg {
+            background: #ddd2e8;
+            border-radius: 30px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: #b77dd9;
+            width: 0%;
+            height: 100%;
+            border-radius: 30px;
+            transition: width 0.3s ease;
+        }
+
+        .q-counter {
+            text-align: right;
+            font-size: 0.75rem;
+            margin-top: 6px;
+            color: #6a4e84;
+            font-weight: 500;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 28px;
+            padding: 20px 16px;
+            margin: 12px 0 16px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            line-height: 1.35;
+            margin-bottom: 24px;
+            color: #2a193b;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: #f9f5ff;
+            border: 1.5px solid #e2d4ef;
+            border-radius: 60px;
+            padding: 14px 18px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: left;
+            color: #311f45;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: inherit;
+            width: 100%;
+        }
+
+        .option-btn:active {
+            background: #e9ddf9;
+            transform: scale(0.97);
+        }
+
+        .option-btn.selected {
+            background: #d9c3f0;
+            border-color: #a26fcc;
+            color: #1e112c;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .btn-nav {
+            flex: 1;
+            background: #e2d4f0;
+            border: none;
+            padding: 12px 0;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            font-family: inherit;
+            color: #4b2b6b;
+            transition: 0.2s;
+            text-align: center;
+        }
+
+        .btn-nav.disabled-btn {
+            background: #e9e2f0;
+            color: #b8a9cf;
+            cursor: not-allowed;
+            opacity: 0.7;
+            transform: none;
+        }
+
+        .btn-primary-nav {
+            background: #8b5eb6;
+            color: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-primary-nav:active {
+            background: #734b9b;
+        }
+
+        .result-card {
+            text-align: center;
+            background: #ffffffde;
+            border-radius: 32px;
+            padding: 24px 20px 20px;
+            margin-top: 16px;
+            position: relative;
+        }
+
+        .result-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #632c9e;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .result-song {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #632c9e;
+            margin: 8px 0 8px;
+        }
+
+        .result-desc {
+            color: #4d3369;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .restart-btn {
+            background: #c2a2df;
+            color: #2a1a3a;
+            padding: 10px 24px;
+            border-radius: 60px;
+            font-weight: bold;
+            border: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 8px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .share-area {
+            margin: 16px auto 10px;
+            text-align: center;
+        }
+        
+        .share-text {
+            font-size: 14px;
+            color: #5e3c7e;
+            background: #f1e9fc;
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 60px;
+            font-weight: 500;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        
+        .share-text:active {
+            transform: scale(0.96);
+            background: #e5d9f5;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 0.7rem;
+            color: #896eb0;
+        }
+
+        .toast-msg {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.75);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 14px;
+            z-index: 999;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="app">
+    <div id="quizView">
+        <div class="hero">
+            <h1><span class="emoji">🥛</span> 你是单依纯的哪首歌？</h1>
+            <p>12道灵魂拷问 · 找到单依纯为你唱的那一首歌</p>
+        </div>
+        <div class="progress-area">
+            <div class="progress-bar-bg"><div class="progress-fill" id="progressFill"></div></div>
+            <div class="q-counter" id="qCounter">第1 / 12题</div>
+        </div>
+        <div class="question-card">
+            <div class="question-text" id="questionText"></div>
+            <div class="options" id="optionsContainer"></div>
+        </div>
+        <div class="action-buttons">
+            <button class="btn-nav" id="prevBtn">◀ 上一题</button>
+            <button class="btn-nav btn-primary-nav" id="nextBtn">下一题 ▶</button>
+        </div>
+    </div>
+    <div id="resultView" style="display: none;"></div>
+    <footer>🎤 音乐品味向量 · 匹配单依纯的音乐性格</footer>
+</div>
+
+<script>
+    // 题目数据
+    const questions = [
+        { text: "听一首新歌时，你会被什么吸引？", options: [
+            { label: "旋律是否流畅动听", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
+            { label: "是否有Diva级的唱功", vector: { emotional: 0, skill: 2, rhythm: 0, experimental: 0 } },
+            { label: "节奏和律动能否让人跟着摇摆", vector: { emotional: 0, skill: 0, rhythm: 2, experimental: 0 } },
+            { label: "编曲有没有新意", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 2 } }
+        ] },
+        { text: "你更像哪一种动物？", options: [
+            { label: "一只在窗台上看雨的猫", vector: { emotional: 4, skill: 0, rhythm: 0, experimental: 0 } },
+            { label: "一只跟着音乐轻轻扇动翅膀的蝴蝶", vector: { emotional: 0, skill: 0, rhythm: 4, experimental: 0 } },
+            { label: "一只没人见过的外星生物", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 4 } },
+            { label: "一只突然飞起、惊动整片树林的鸟", vector: { emotional: 0, skill: 4, rhythm: 0, experimental: 0 } }
+        ] },
+        { text: "你更愿意进行什么样的旅行？", options: [
+            { label: "有烟火气的小城，随便走走就很舒服", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
+            { label: "繁华的大都市，24小时都热闹", vector: { emotional: 0, skill: 2, rhythm: 0, experimental: 0 } },
+            { label: "没有攻略，跟着直觉走", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 2 } },
+            { label: "抢到哪儿的演唱会就去哪儿旅行", vector: { emotional: 0, skill: 0, rhythm: 2, experimental: 0 } }
+        ] },
+        { text: "单依纯的声音让你联想到？", options: [
+            { label: "深秋凌晨的薄雾", vector: { emotional: 3, skill: 0, rhythm: 0, experimental: 0 } },
+            { label: "一颗正在启航的星星", vector: { emotional: 0, skill: 2, rhythm: 0, experimental: 1 } },
+            { label: "月光下微微泛起涟漪的湖面", vector: { emotional: 1, skill: 0, rhythm: 2, experimental: 0 } },
+            { label: "一个流光溢彩的水晶球", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 3 } }
+        ] },
+        { text: "你更愿意成为哪一种存在？", options: [
+            { label: "夜空中让人鼓掌的烟火", vector: { emotional: 0, skill: 2, rhythm: 0, experimental: 0 } },
+            { label: "穿林而过的风，叶子沙沙地应和", vector: { emotional: 0, skill: 0, rhythm: 2, experimental: 0 } },
+            { label: "一个无人能解的谜题", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 2 } },
+            { label: "深海里那束不知道从哪照进来的光", vector: { emotional: 3, skill: 0, rhythm: 0, experimental: 0 } }
+        ] },
+        { text: "KTV里你一般点什么歌？", options: [
+            { label: "抒情走心慢歌", vector: { emotional: 3, skill: 0, rhythm: -1, experimental: 0 } },
+            { label: "冷门但好听的歌，唱完有人问歌名", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 2 } },
+            { label: "R&B，转音多才过瘾", vector: { emotional: 0, skill: 0, rhythm: 2, experimental: 0 } },
+            { label: "高音有挑战性，唱完很爽的那种", vector: { emotional: 0, skill: 2, rhythm: 0, experimental: 0 } }
+        ] },
+        { text: "你更喜欢哪种声音质感？", options: [
+            { label: "温暖贴耳、富含中高频的气声", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
+            { label: "金属质感的共鸣，像敲击银器", vector: { emotional: 0, skill: 2, rhythm: 0, experimental: 0 } },
+            { label: "丝绸滑动般的柔软", vector: { emotional: 0, skill: 0, rhythm: 2, experimental: 0 } },
+            { label: "黑暗中合成器滑过的那一道荧光色的尾音", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 2 } }
+        ] },
+        { text: "你觉得歌词最重要的是什么？", options: [
+            { label: "像一首可以脱离旋律独立存在的诗", vector: { emotional: 3, skill: 0, rhythm: 0, experimental: 1 } },
+            { label: "能讲一个完整的故事，像看了一场电影", vector: { emotional: 4, skill: 0, rhythm: 0, experimental: 0 } },
+            { label: "与旋律严丝合缝，字和音完美匹配", vector: { emotional: 1, skill: 1, rhythm: 2, experimental: 0 } },
+            { label: "有态度，听完就知道你是谁", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 3 } }
+        ] },
+        { text: "爱在你的生活中更像是什么？", options: [
+            { label: "像主食，每顿都要有", vector: { emotional: 7, skill: 0, rhythm: -4, experimental: -3 } },
+            { label: "像调料，是生活中浓墨重彩的一笔", vector: { emotional: 4, skill: 0, rhythm: -2, experimental: -1 } },
+            { label: "像配菜，有它会丰富，没有也不影响饱", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
+            { label: "像剩菜，热不热都行，有时候直接倒了", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 0 } }
+        ] },
+        { text: "你最想梦到哪个场景？", options: [
+            { label: "一片永远下着雨的海边", vector: { emotional: 3, skill: 0, rhythm: 0, experimental: 0 } },
+            { label: "一座突然会唱歌的旧剧院", vector: { emotional: 0, skill: 2, rhythm: 0, experimental: 1 } },
+            { label: "一条华丽的旋转楼梯", vector: { emotional: 0, skill: 0, rhythm: 2, experimental: 0 } },
+            { label: "一个所有颜色都在流动的房间", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 3 } }
+        ] },
+        { text: "难过的时候，你通常会？", options: [
+            { label: "一个人待着，慢慢消化", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
+            { label: "做点别的事情转移注意力", vector: { emotional: 0, skill: 2, rhythm: 0, experimental: 0 } },
+            { label: "听歌，随着音乐舞动", vector: { emotional: 0, skill: 0, rhythm: 2, experimental: 0 } },
+            { label: "写点东西或者做点创作", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 2 } }
+        ] },
+        { text: "你更希望别人记住你什么？", options: [
+            { label: "曾经在某个人最难的时候陪过他", vector: { emotional: 5, skill: 0, rhythm: 0, experimental: 0 } },
+            { label: "那种说不清道不明、但让人忘不掉的气质", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 5 } },
+            { label: "才华让人惊艳的那个瞬间", vector: { emotional: 0, skill: 5, rhythm: 0, experimental: 0 } },
+            { label: "身上那种让人放松的氛围", vector: { emotional: 0, skill: 0, rhythm: 5, experimental: 0 } }
+        ] }
+    ];
+
+    // 歌曲数据
+    const songs = [
+        { name: "你的珍藏", emotional: 8, skill: 5, rhythm: 3, experimental: 0.5, desc: "你飞得很高、很远，<br>也值得一个可以永远稳稳接住你的港湾。" },
+        { name: "照片", emotional: 9.5, skill: 4, rhythm: 3, experimental: 1.5, desc: "你拥有着值得你用一生去整理和纪念的东西。<br>这样的人，心里有一座自己的博物馆，不对外开放，但永远亮着灯。" },
+        { name: "在夜里跳舞", emotional: 8, skill: 5, rhythm: 6, experimental: 2, desc: "你太知道爱的分量。<br>你的克制不是冷淡，是你把所有的热情都调成了静音。<br>这样的人，不轻易开始，但开始了就不会结束。" },
+        { name: "爱我的时候（with周兴哲）", emotional: 7, skill: 3, rhythm: 5, experimental: 2, desc: "你像冬天里的一杯热可可，<br>你给的温暖，不是轰轰烈烈，是刚好。<br>刚好在需要的时候出现，刚好让人想靠近。" },
+        { name: "分身", emotional: 10, skill: 5, rhythm: 4, experimental: 2, desc: "你的多面性令人捉摸不透。<br>而你的每一个分身，都是与周遭世界每一次交手的证据。" },
+        { name: "喂", emotional: 6, skill: 6, rhythm: 8, experimental: 3, desc: "你在自己的节奏里晃，不急也不停。<br>你在混乱里找平衡，在热闹里走神。<br>那些高音不是炫技，是你终于找到一个出口，把憋着的那口气吐出来。" },
+        { name: "续写", emotional: 9.5, skill: 5, rhythm: 3, experimental: 0.5, desc: "你不轻易说爱，但说了就不会收回。<br>你看重承诺，看重那些不需要说出口也懂的时刻。" },
+        { name: "空耳", emotional: 8, skill: 2, rhythm: 4, experimental: 2, desc: "你习惯在那些无意义的日常里找线索。<br>对着空墙找回声，在沉默里找花开。<br>这样的人，有浪漫的天赋。" },
+        { name: "另一种答案", emotional: 4, skill: 5, rhythm: 6, experimental: 4, desc: "你爱人的方式，像一首温柔的R&B，<br>在纷乱的世界中保持着自己的节奏。" },
+        { name: "勇敢额度", emotional: 6, skill: 5, rhythm: 4, experimental: 2, desc: "你摔过，但每次都自己爬起来拍掉灰。<br>你比谁都清楚，那条路为什么值得走。" },
+        { name: "Gray Turns To May", emotional: 5, skill: 2, rhythm: 8, experimental: 4, desc: "你喜欢在旋律里找缝隙，塞进只有自己知道的秘密。<br>别人听歌，你听的是空白处<br>——换气的声音、进鼓前的那半秒、最后一个音落下后的余震。" },
+        { name: "你好快乐", emotional: 5, skill: 4, rhythm: 7, experimental: 5, desc: "你习惯把情绪揉碎了，塞进某个和弦的间隙里。<br>你把白天没说的话，拧成合成器的滤波旋钮，<br>一点一点开，一点一点关。" },
+        { name: "雨后日记", emotional: 4, skill: 3, rhythm: 9, experimental: 3, desc: "你不着急把一切说透，觉得暧昧比答案更迷人。<br>你把自己藏在语气里、藏在旋律的缝隙里、<br>藏在深夜播放列表的第六首歌里。" },
+        { name: "失焦", emotional: 3, skill: 5, rhythm: 8, experimental: 5, desc: "你听的不是歌，是空气在慢慢变湿的感觉。<br>你爱的是声音里的那些缝隙——气声滑过耳廓的瞬间，像有人在你耳边轻轻叹了口气。<br>这样的人，不声张，但靠近你的人，都会被你的频率吸住。" },
+        { name: "Forever In You", emotional: 8.5, skill: 3, rhythm: 6, experimental: 3, desc: "你的真诚不是天真，是你见过复杂之后，还是选了简单。<br>这样的人，是这个时代稀缺的东西。" },
+        { name: "匿名星", emotional: 3, skill: 4, rhythm: 9, experimental: 4, desc: "你不赶流行，流行会过时，但你即兴的旋律不会。<br>你知道自己的价值，不需要别人的鉴定。" },
+        { name: "Tell Me", emotional: 5, skill: 3, rhythm: 7, experimental: 5, desc: "你不喜欢直白的表达，觉得那样少了点韵味。<br>你习惯把话放在语气里，把情绪放在呼吸里，让懂的人自己听出来。" },
+        { name: "热汤", emotional: 8, skill: 6, rhythm: 2, experimental: 1, desc: "你不再急着诉说过往，也不再追问为什么。<br>你飞到了远方，而那些陪你走过一段路的人，你只愿他们别来无恙。" },
+        { name: "靓仔日记", emotional: 6, skill: 5, rhythm: 4, experimental: 1, desc: "你心里有一小块地方，永远停留在那个夏天，<br>它提醒着你，你的青春没有结束。" },
+        { name: "爱的奇幻旅行", emotional: 7, skill: 4, rhythm: 3, experimental: 2, desc: "爱对你来说不是目的地，是沿途所有的天气。<br>你把世界当成一座巨大的游乐场，你负责浪漫。<br>这样的人，走到哪里，哪里就是晴天。" },
+        { name: "你的世界", emotional: 6, skill: 8, rhythm: 6, experimental: 4.5, desc: "你被热爱的事填满的时候，眼里的光是藏不住的。<br>好奇心推着你，翻过一座又一座山。<br>继续跑吧，前方还有没见过的日出、没吹过的晚风、没遇见的自己。" },
+        { name: "想你时风起", emotional: 9.5, skill: 7, rhythm: 5, experimental: 1, desc: "你习惯在深夜打开一首慢歌，让情绪慢慢流出来。<br>你相信有些话不必说出口，风会替你送达。<br>这样的人，深情但不沉重，温柔但不纠缠。" },
+        { name: "Oh lala", emotional: 2, skill: 5, rhythm: 8, experimental: 6, desc: "你像一杯刚倒进冰块的气泡水，<br>不甜腻，不张扬，但你出现的时候，气氛会自己亮起来。" },
+        { name: "再见往事", emotional: 7, skill: 6, rhythm: 4, experimental: 4, desc: "你相信，黑夜再长，也挡不住天亮。<br>你不是在等光，你是自己提着灯往前走。" },
+        { name: "爱里", emotional: 10, skill: 6, rhythm: 5, experimental: 2, desc: "你是那种让人忍不住想要靠近的人，<br>你的温柔不是刻意，是你本来就如此。" },
+        { name: "奇观", emotional: 8, skill: 6, rhythm: 6, experimental: 7, desc: "你神秘、迷人，对别人有种说不清的引力。<br>你的独特不是精心设计的，是你本来就长这样。" },
+        { name: "七彩光", emotional: 8, skill: 1, rhythm: 5, experimental: 9, desc: "你复杂、迷人、让人想驻足了解。<br>靠近你，像是走进一场半梦半醒的幻觉<br>——说不清哪里特别，但就是忘不掉。" },
+        { name: "还有什么更好的", emotional: 1, skill: 8, rhythm: 9, experimental: 8, desc: "世界刚打开，阳光正正好。<br>你心里还住着一个会为小事雀跃的小女孩。<br>这样的人，走到哪里都能捡到糖。" },
+        { name: "纯妹妹", emotional: 0.5, skill: 8, rhythm: 10, experimental: 10, desc: "你的少女心不是还没长大，而是你选择把自己养得很好。<br>这样的你，值得被世界温柔以待。" },
+        { name: "向日葵朝着夜", emotional: 7, skill: 6, rhythm: 7, experimental: 8, desc: "你与这个世界周旋良久，眼神却里满是温柔。<br>你的奇怪、你的慢半拍、你那些说不清的小情绪<br>——都是你最珍贵的独特之处。" },
+        { name: "假如我们还爱着", emotional: 9, skill: 3, rhythm: 4, experimental: 5, desc: "时间拿不走你的真诚，只是把它藏得更深了。<br>你学会了把一段感情放进抽屉里，不常打开，但你知道它在那里。" },
+        { name: "我管不住我自己", emotional: 1, skill: 6, rhythm: 8, experimental: 6, desc: "你身上有一种藏不住的可爱。<br>世界太大，但你总能找到那些亮晶晶的小东西。" },
+        { name: "有趣", emotional: 0.5, skill: 10, rhythm: 7, experimental: 10, desc: "你拒绝无聊。<br>人生苦短，必须加点料。<br>你把日子过成了自己的实验剧场。" },
+        { name: "我表示理解", emotional: 1, skill: 5, rhythm: 7, experimental: 8, desc: "你看得太清楚，所以懒得较真。不解释，不辩解。<br>别人争对错的时候，你在看风景。你不赶浪潮，你自己就是海。" },
+        { name: "还你茉莉", emotional: 0.5, skill: 9, rhythm: 5, experimental: 10, desc: "你在有力的鼓点中俯视山川河流，<br>你坚定地张开双臂，允许一切穿过自己。<br>心中有爱，仁者无敌。" },
+        { name: "多少的光阴", emotional: 9, skill: 3, rhythm: 4, experimental: 7, desc: "时间在你身上留下的不是痕迹，是养分。<br>这样的人像潮汐，有自己的时辰，不跟着任何人的表走。" },
+        { name: "珠玉", emotional: 7, skill: 10, rhythm: 5, experimental: 10, desc: "你在世事沉浮中坚持着真实的自我。<br>千淘万洗，珠玉自现。" },
+        { name: "执", emotional: 7, skill: 5, rhythm: 3, experimental: 3, desc: "你看透了因果，却还是选了那个因。<br>你清醒地固执，比盲目更难得。" },
+        { name: "纯寐寐", emotional: 2.5, skill: 6, rhythm: 9, experimental: 7.5, desc: "别人在抢拍子，你在等拍子来找你。<br>慵懒的鼓点在你身边绕啊绕，你躺在里面，手指跟着轻轻敲。<br>你眯着眼，世界在你面前慢慢转。" },
+        { name: "光波", emotional: 6, skill: 5, rhythm: 7, experimental: 6, desc: "你不是在破碎，你是在蜕壳。<br>壳裂开的时候，光才能照进来。" },
+        { name: "君", emotional: 10, skill: 7, rhythm: 4, experimental: 1, desc: "你的成熟超越了年龄。<br>你的安静不是冷漠，是你已经不需要用喧哗来证明自己存在。" },
+        { name: "明知故问（with张靓颖）", emotional: 6, skill: 9, rhythm: 7, experimental: 2, desc: "你心里有一片无人抵达的旷野，只有最强韧的声音才能把它填满。<br>你的情绪阈值比别人高，不是因为冷漠，<br>是因为你见过真正的排山倒海，便不再为小风小浪动容。" },
+        { name: "4ever in U", emotional: 1, skill: 3, rhythm: 9, experimental: 6, desc: "你的脚步踩着鼓点的缝隙，不快不慢，刚好让自己开心。<br>像一阵自由的风，吹到哪儿都带着轻快的节奏。<br>你活着，不是来适应的，是来尽兴的。" },
+        { name: "落笔成书", emotional: 8, skill: 3, rhythm: 4, experimental: 2, desc: "你像一本写满批注的书，边角折了又折。<br>你的敏感不是负担，是你对生活最深的理解。" },
+        { name: "TENDER", emotional: 2, skill: 6, rhythm: 9, experimental: 5, desc: "对待感情，你知道什么时候该靠近，什么时候该退半步，<br>把暧昧的节奏拿捏得像鼓点一样准。" },
+        { name: "终身孤独", emotional: 8, skill: 8, rhythm: 3, experimental: 2, desc: "你不是孤独，你只是在自己的频率上。<br>你不羡慕别人的热闹，就像深海不羡慕岸上的喧嚣。" },
+        { name: "太阳公主", emotional: 5, skill: 10, rhythm: 5, experimental: 9, desc: "你坚韧不拔，无惧逆流，<br>你热烈的生命能够燃烧出耀眼的光茫。" }
+    ];
+
+    let currentIndex = 0;
+    let selectedAnswers = new Array(questions.length).fill(null);
+    let autoTimer = null;
+
+    function showToast(msg) {
+        let existing = document.querySelector('.toast-msg');
+        if (existing) existing.remove();
+        let div = document.createElement('div');
+        div.className = 'toast-msg';
+        div.innerText = msg;
+        document.body.appendChild(div);
+        setTimeout(() => div.remove(), 2000);
+    }
+
+    function updatePrevButtonStyle() {
+        const prevBtn = document.getElementById('prevBtn');
+        if (currentIndex === 0) {
+            prevBtn.classList.add('disabled-btn');
+        } else {
+            prevBtn.classList.remove('disabled-btn');
+        }
+    }
+
+    function clearAutoTimer() {
+        if (autoTimer) {
+            clearTimeout(autoTimer);
+            autoTimer = null;
+        }
+    }
+
+    function renderQuestion() {
+        clearAutoTimer();
+        const q = questions[currentIndex];
+        document.getElementById('questionText').innerText = q.text;
+        const optsContainer = document.getElementById('optionsContainer');
+        optsContainer.innerHTML = '';
+        q.options.forEach((opt, idx) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            if (selectedAnswers[currentIndex] === idx) btn.classList.add('selected');
+            btn.innerText = opt.label;
+            btn.onclick = () => {
+                if (selectedAnswers[currentIndex] === idx) return;
+                selectedAnswers[currentIndex] = idx;
+                renderQuestion();
+                clearAutoTimer();
+                autoTimer = setTimeout(() => {
+                    if (currentIndex + 1 < questions.length) {
+                        currentIndex++;
+                        renderQuestion();
+                    } else {
+                        finishTest();
+                    }
+                }, 200);
+            };
+            optsContainer.appendChild(btn);
+        });
+        const percent = ((currentIndex + 1) / questions.length) * 100;
+        document.getElementById('progressFill').style.width = `${percent}%`;
+        document.getElementById('qCounter').innerText = `第${currentIndex + 1} / ${questions.length}题`;
+        updatePrevButtonStyle();
+    }
+
+    function goToNext() {
+        if (selectedAnswers[currentIndex] === null) {
+            showToast("🥚 请先选择一个选项再继续～");
+            return;
+        }
+        clearAutoTimer();
+        if (currentIndex + 1 < questions.length) {
+            currentIndex++;
+            renderQuestion();
+        } else {
+            finishTest();
+        }
+    }
+
+    function prevQuestion() {
+        if (currentIndex === 0) {
+            showToast("🥚 已经是第一题啦");
+            return;
+        }
+        clearAutoTimer();
+        currentIndex--;
+        renderQuestion();
+    }
+    
+    function copyShareLink() {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+            showToast("🔗 链接已复制，快分享给朋友吧！");
+        }).catch(() => {
+            showToast("📋 请手动复制链接分享～");
+        });
+    }
+
+    function finishTest() {
+        clearAutoTimer();
+        let userVector = { emotional: 0, skill: 0, rhythm: 0, experimental: 0 };
+        for (let i = 0; i < questions.length; i++) {
+            const answerIdx = selectedAnswers[i];
+            if (answerIdx !== null) {
+                const vec = questions[i].options[answerIdx].vector;
+                userVector.emotional += vec.emotional || 0;
+                userVector.skill += vec.skill || 0;
+                userVector.rhythm += vec.rhythm || 0;
+                userVector.experimental += vec.experimental || 0;
+            }
+        }
+
+        let bestSong = null;
+        let minDistance = Infinity;
+        for (const song of songs) {
+            const dist = Math.sqrt(
+                Math.pow(userVector.emotional - song.emotional, 2) +
+                Math.pow(userVector.skill - song.skill, 2) +
+                Math.pow(userVector.rhythm - song.rhythm, 2) +
+                Math.pow(userVector.experimental - song.experimental, 2)
+            );
+            if (dist < minDistance) {
+                minDistance = dist;
+                bestSong = song;
+            }
+        }
+
+        const quizView = document.getElementById('quizView');
+        const resultView = document.getElementById('resultView');
+        quizView.style.display = 'none';
+        resultView.style.display = 'block';
+
+        resultView.innerHTML = `
+            <div class="result-card">
+                <div class="result-title">
+                    <span>🥛</span> 你的测试结果为
+                </div>
+                <div class="result-song">${bestSong.name}</div>
+                <div class="result-desc">${bestSong.desc}</div>
+                <button class="restart-btn" id="restartBtn">🔄 重新测试</button>
+                <div class="share-area">
+                    <div class="share-text" id="shareLinkBtn">📤 快分享给你的朋友吧！</div>
+                </div>
+            </div>
+        `;
+
+        document.getElementById('restartBtn').addEventListener('click', () => {
+            currentIndex = 0;
+            selectedAnswers = new Array(questions.length).fill(null);
+            quizView.style.display = 'block';
+            resultView.style.display = 'none';
+            renderQuestion();
+        });
+        
+        document.getElementById('shareLinkBtn').addEventListener('click', copyShareLink);
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', prevQuestion);
+    document.getElementById('nextBtn').addEventListener('click', goToNext);
+    renderQuestion();
+</script>
+</body>
+</html>
