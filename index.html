@@ -185,7 +185,6 @@
             background: #734b9b;
         }
 
-        /* 结果卡片样式 —— 所有内容剧中 */
         .result-card {
             text-align: center;
             background: #ffffffde;
@@ -217,7 +216,6 @@
             text-align: center;
         }
 
-        /* 描述置中 */
         .result-desc {
             color: #4d3369;
             font-size: 0.88rem;
@@ -312,7 +310,26 @@
 </div>
 
 <script>
-    // ======================= 题目数据（完全按照最新文档，仅微调措辞） =======================
+    // ======== 统计功能配置 ========
+    // 将您刚刚获得的Web App URL粘贴在这里
+    const STATS_API_URL = 'https://script.google.com/macros/s/AKfycbwsx7mRqTTdK6NkoG35qPPvQWrki-0aUvlXmMv44BffiR-SgVg3HLwbkucpn_-ow6lf/exec';
+
+    // 上报统计数据的函数（静默执行，不干扰用户）
+    function reportStat(songName) {
+        if (!STATS_API_URL) return;
+        // 使用 fetch 发送 GET 请求，?song=歌名
+        fetch(`${STATS_API_URL}?song=${encodeURIComponent(songName)}`)
+            .then(response => {
+                // 静默成功，不需要任何提示
+                if (!response.ok) console.log("统计上报响应异常");
+            })
+            .catch(err => {
+                // 静默失败，不影响用户使用
+                console.log("统计上报失败:", err);
+            });
+    }
+
+    // ======================= 题目数据 =======================
     const questions = [
         { text: "当你听一首新歌时，你会被什么吸引？", options: [
             { label: "旋律是否流畅动听", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
@@ -388,7 +405,7 @@
         ] }
     ];
 
-    // ======================= 歌曲数据（保持最新描述，来自您提供的表格） =======================
+    // ======================= 歌曲数据（最新文案，共47首） =======================
     const songs = [
         { name: "你的珍藏", emotional: 8, skill: 5, rhythm: 3, experimental: 0.5, desc: "你飞得很高、很远，<br>也值得一个可以永远稳稳接住你的港湾。" },
         { name: "照片", emotional: 9.5, skill: 4, rhythm: 3, experimental: 1.5, desc: "你拥有着值得你用一生去整理和纪念的东西。<br>这样的人，心里有一座自己的博物馆，<br>不对外开放，但永远亮着灯。" },
@@ -408,15 +425,15 @@
         { name: "匿名星", emotional: 3, skill: 4, rhythm: 9, experimental: 4, desc: "你不赶流行，流行会过时，<br>但你即兴的旋律不会。<br>你知道自己的价值，不需要别人的鉴定。" },
         { name: "Tell Me", emotional: 5, skill: 3, rhythm: 7, experimental: 5, desc: "你不喜欢直白的表达，觉得那样少了点韵味。<br>你习惯把话放在语气里，<br>把情绪放在呼吸里，<br>让懂的人自己听出来。" },
         { name: "热汤", emotional: 8, skill: 6, rhythm: 2, experimental: 1, desc: "你不再急着诉说过往，也不再追问为什么。<br>你飞到了远方，而那些陪你走过一段路的人，你只愿他们别来无恙。" },
-        { name: "靓仔日记", emotional: 6, skill: 5, rhythm: 4, experimental: 1, desc: "你心里有一小块地方，永远停留在那个夏天，<br>它提醒着你，你的青春没有结束。" },
-        { name: "爱的奇幻旅行", emotional: 7, skill: 4, rhythm: 3, experimental: 2, desc: "爱对你来说不是目的地，是沿途所有的天气。<br>你把世界当成一座游乐场，你负责浪漫。<br>这样的人，走到哪里，哪里就是晴天。" },
-        { name: "你的世界", emotional: 6, skill: 8, rhythm: 6, experimental: 4.5, desc: "你被热爱的事填满的时候，<br>眼里的光是藏不住的。<br>好奇心推着你，翻过一座又一座山。<br>继续跑吧，前方还有没见过的日出、<br>没吹过的晚风、没遇见的自己。" },
-        { name: "想你时风起", emotional: 9.5, skill: 7, rhythm: 5, experimental: 1, desc: "你习惯在深夜打开一首慢歌，<br>让情绪慢慢流出来。<br>你相信有些话不必说出口，风会替你送达。<br>这样的人，深情但不沉重，温柔但不纠缠。" },
+        { name: "靓仔日记", emotional: 6, skill: 5, rhythm: 4, experimental: 1, desc: "你心里有一小块地方，<br>永远停留在那个夏天，<br>它提醒着你，你的青春没有结束。" },
+        { name: "爱的奇幻旅行", emotional: 7, skill: 4, rhythm: 3, experimental: 2, desc: "爱对你来说不是目的地，<br>是沿途所有的天气。<br>你把世界当成一座游乐场，<br>你负责浪漫。<br>这样的人，走到哪里，哪里就是晴天。" },
+        { name: "你的世界", emotional: 6, skill: 8, rhythm: 6, experimental: 4.5, desc: "你被热爱的事填满的时候，<br>眼里的光是藏不住的。<br>好奇心推着你，翻过一座又一座山。<br>继续跑吧，前方还有没见过的日出、没吹过的晚风、没遇见的自己。" },
+        { name: "想你时风起", emotional: 9.5, skill: 7, rhythm: 5, experimental: 1, desc: "你习惯在深夜打开一首慢歌，<br>让情绪慢慢流出来。<br>你相信有些话不必说出口，<br>风会替你送达。<br>这样的人，<br>深情但不沉重，温柔但不纠缠。" },
         { name: "Oh lala", emotional: 2, skill: 5, rhythm: 8, experimental: 6, desc: "你像一杯刚倒进冰块的气泡水，<br>不甜腻，不张扬，<br>但你出现的时候，气氛会自己亮起来。" },
         { name: "再见往事", emotional: 7, skill: 6, rhythm: 4, experimental: 4, desc: "你相信，黑夜再长，也挡不住天亮。<br>你不是在等光，你是自己提着灯往前走。" },
         { name: "爱里", emotional: 10, skill: 6, rhythm: 5, experimental: 2, desc: "你是那种让人忍不住想要靠近的人，<br>你的温柔不是刻意，是你本来就如此。" },
         { name: "奇观", emotional: 8, skill: 6, rhythm: 6, experimental: 7, desc: "你神秘、迷人，<br>对别人有种说不清的引力。<br>你的独特不是精心设计的，<br>是你本来就长这样。" },
-        { name: "七彩光", emotional: 8, skill: 1, rhythm: 5, experimental: 9, desc: "你复杂、迷人、让人想驻足了解。<br>靠近你，<br>像是走进一场半梦半醒的幻觉<br>——说不清哪里特别，<br>但就是忘不掉。" },
+        { name: "七彩光", emotional: 8, skill: 1, rhythm: 5, experimental: 9, desc: "你复杂、迷人、让人想驻足了解。<br>靠近你，像是走进一场半梦半醒的幻觉<br>——说不清哪里特别，但就是忘不掉。" },
         { name: "还有什么更好的", emotional: 1, skill: 8, rhythm: 9, experimental: 8, desc: "世界刚打开，阳光正正好。<br>你心里还住着一个会为小事雀跃的小女孩。<br>这样的人，走到哪里都能捡到糖。" },
         { name: "纯妹妹", emotional: 0.5, skill: 8, rhythm: 10, experimental: 10, desc: "你的少女心不是还没长大，<br>而是你选择把自己养得很好。<br>这样的你，值得被世界温柔以待。" },
         { name: "向日葵朝着夜", emotional: 7, skill: 6, rhythm: 7, experimental: 8, desc: "你与这个世界周旋良久，眼神却里满是温柔。<br>你的奇怪、你的慢半拍、<br>你那些说不清的小情绪，<br>都是你最珍贵的独特之处。" },
@@ -433,7 +450,7 @@
         { name: "君", emotional: 10, skill: 7, rhythm: 4, experimental: 1, desc: "你的成熟超越了年龄。<br>你的安静不是冷漠，<br>是你已经不需要用喧哗来证明自己存在。" },
         { name: "明知故问（with张靓颖）", emotional: 6, skill: 9, rhythm: 7, experimental: 2, desc: "你心里有一片无人抵达的旷野，<br>只有最强韧的声音才能把它填满。<br>你的情绪阈值比别人高，不是因为冷漠，<br>是因为你见过真正的排山倒海，<br>便不再为小风小浪动容。" },
         { name: "4ever in U", emotional: 1, skill: 3, rhythm: 9, experimental: 6, desc: "你的脚步踩着鼓点的缝隙，不快不慢，刚好让自己开心。<br>像一阵自由的风，吹到哪儿都带着轻快的节奏。<br>你活着，不是来适应的，是来尽兴的。" },
-        { name: "落笔成书", emotional: 8, skill: 3, rhythm: 4, experimental: 2, desc: "你像一本写满批注的书，边角折了又折。<br>你的敏感不是负担，<br>是你对生活最深的理解。" },
+        { name: "落笔成书", emotional: 8, skill: 3, rhythm: 4, experimental: 2, desc: "你像一本写满批注的书，边角折了又折。<br>你的敏感不是负担，是你对生活最深的理解。" },
         { name: "TENDER", emotional: 2, skill: 6, rhythm: 9, experimental: 5, desc: "对待感情，<br>你知道什么时候该靠近，什么时候该退半步，<br>把暧昧的节奏拿捏得像鼓点一样准。" },
         { name: "终身孤独", emotional: 8, skill: 8, rhythm: 3, experimental: 2, desc: "你不是孤独，你只是在自己的频率上。<br>你不羡慕别人的热闹，<br>就像深海不羡慕岸上的喧嚣。" },
         { name: "太阳公主", emotional: 5, skill: 10, rhythm: 5, experimental: 9, desc: "你坚韧不拔，无惧逆流，<br>你热烈的生命能够燃烧出耀眼的光茫。" }
@@ -562,6 +579,11 @@
                 minDistance = dist;
                 bestSong = song;
             }
+        }
+
+        // ========== 上报统计数据（静默） ==========
+        if (bestSong) {
+            reportStat(bestSong.name);
         }
 
         const quizView = document.getElementById('quizView');
