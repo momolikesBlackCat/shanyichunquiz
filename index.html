@@ -185,6 +185,7 @@
             background: #734b9b;
         }
 
+        /* 结果卡片样式 —— 所有内容剧中 */
         .result-card {
             text-align: center;
             background: #ffffffde;
@@ -192,6 +193,9 @@
             padding: 24px 20px 20px;
             margin-top: 16px;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .result-title {
@@ -209,18 +213,18 @@
             font-size: 2rem;
             font-weight: 800;
             color: #632c9e;
-            margin: 8px 0 8px;
+            margin: 8px 0 12px;
+            text-align: center;
         }
 
-        /* 结果页描述字体调小一点点点点 */
+        /* 描述置中 */
         .result-desc {
             color: #4d3369;
             font-size: 0.88rem;
             line-height: 1.5;
-            margin-bottom: 20px;
+            margin: 0 auto 20px auto;
             max-width: 90%;
-            margin-left: auto;
-            margin-right: auto;
+            text-align: center;
         }
 
         .restart-btn {
@@ -232,14 +236,14 @@
             border: none;
             font-size: 0.9rem;
             cursor: pointer;
-            margin-top: 8px;
-            margin-bottom: 20px;
+            margin: 0 0 16px 0;
             display: inline-block;
         }
 
         .share-area {
-            margin: 16px auto 10px;
+            margin: 0 auto;
             text-align: center;
+            width: 100%;
         }
         
         .share-text {
@@ -308,7 +312,7 @@
 </div>
 
 <script>
-    // ======================= 题目数据（根据最新文档更新） =======================
+    // ======================= 题目数据（完全按照最新文档，仅微调措辞） =======================
     const questions = [
         { text: "当你听一首新歌时，你会被什么吸引？", options: [
             { label: "旋律是否流畅动听", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
@@ -378,13 +382,13 @@
         ] },
         { text: "你更希望别人记住你什么？", options: [
             { label: "曾经在某个人最难的时候陪过他", vector: { emotional: 5, skill: 0, rhythm: 0, experimental: 0 } },
-            { label: "那种说不清道不明、但让人忘不掉的气质", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 5 } },
+            { label: "说不清道不明、但让人忘不掉的气质", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 5 } },
             { label: "才华让人惊艳的那个瞬间", vector: { emotional: 0, skill: 5, rhythm: 0, experimental: 0 } },
             { label: "身上那种让人放松的氛围", vector: { emotional: 0, skill: 0, rhythm: 5, experimental: 0 } }
         ] }
     ];
 
-    // ======================= 歌曲数据（根据最新Excel内容，描述已更新） =======================
+    // ======================= 歌曲数据（保持最新描述，来自您提供的表格） =======================
     const songs = [
         { name: "你的珍藏", emotional: 8, skill: 5, rhythm: 3, experimental: 0.5, desc: "你飞得很高、很远，<br>也值得一个可以永远稳稳接住你的港湾。" },
         { name: "照片", emotional: 9.5, skill: 4, rhythm: 3, experimental: 1.5, desc: "你拥有着值得你用一生去整理和纪念的东西。<br>这样的人，心里有一座自己的博物馆，<br>不对外开放，但永远亮着灯。" },
@@ -525,7 +529,7 @@
     function copyShareLink() {
         const url = window.location.href;
         navigator.clipboard.writeText(url).then(() => {
-            showToast("🔗 链接已复制，快分享给朋友吧！");
+            showToast("🔗 链接已复制，邀请你的朋友也来测一测吧！");
         }).catch(() => {
             showToast("📋 请手动复制链接分享～");
         });
@@ -568,13 +572,13 @@
         resultView.innerHTML = `
             <div class="result-card">
                 <div class="result-title">
-                    <span>🥛</span> 你的测试结果为
+                    <span>🥛</span> 原来你是单依纯的这首歌：
                 </div>
                 <div class="result-song">${bestSong.name}</div>
                 <div class="result-desc">${bestSong.desc}</div>
                 <button class="restart-btn" id="restartBtn">🔄 重新测试</button>
                 <div class="share-area">
-                    <div class="share-text" id="shareLinkBtn">📤 快分享给你的朋友吧！</div>
+                    <div class="share-text" id="shareLinkBtn">📤 邀请你的朋友也来测一测</div>
                 </div>
             </div>
         `;
