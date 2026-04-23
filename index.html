@@ -306,7 +306,7 @@
 </div>
 
 <script>
-    // ======================= 统计功能配置 =======================
+    // ======================= 统计功能配置 (请使用您自己的Web App URL) =======================
     const STATS_API_URL = 'https://script.google.com/macros/s/AKfycbwsx7mRqTTdK6NkoG35qPPvQWrki-0aUvlXmMv44BffiR-SgVg3HLwbkucpn_-ow6lf/exec';
 
     function reportStat(songName) {
@@ -316,12 +316,12 @@
             .catch(err => { console.log("统计上报失败:", err); });
     }
 
-    // ======================= 题目数据（根据最新文档） =======================
+    // ======================= 题目数据 (根据最新文档) =======================
     const questions = [
         { text: "当你听一首新歌时，你会被什么吸引？", options: [
             { label: "旋律是否流畅动听", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
             { label: "是否有Diva级的唱功", vector: { emotional: 0, skill: 2, rhythm: 0, experimental: 0 } },
-            { label: "节奏和律动能否让人跟着摇摆", vector: { emotional: 0, skill: 0, rhythm: 2, experimental: 0 } },
+            { label: "节奏和律动能否让人跟着摇摆", vector: { emotional: 0, skill: 0, rhythm: 3, experimental: 0 } },
             { label: "编曲有没有新意", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 2 } }
         ] },
         { text: "你更像哪一种动物？", options: [
@@ -334,7 +334,7 @@
             { label: "有烟火气的小城，随便走走就很舒服", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
             { label: "繁华的大都市，24小时都热闹", vector: { emotional: 0, skill: 2, rhythm: 0, experimental: 0 } },
             { label: "没有攻略，跟着直觉走", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 2 } },
-            { label: "抢到哪儿的演唱会就去哪儿旅行", vector: { emotional: 0, skill: 0, rhythm: 2, experimental: 0 } }
+            { label: "抢到哪儿的演唱会票就去哪儿旅行", vector: { emotional: 0, skill: 0, rhythm: 3, experimental: 0 } }
         ] },
         { text: "单依纯的声音让你联想到？", options: [
             { label: "深秋凌晨的薄雾", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
@@ -362,15 +362,15 @@
         ] },
         { text: "你觉得歌词最重要的是什么？", options: [
             { label: "像一首可以脱离旋律独立存在的诗", vector: { emotional: 3, skill: 0, rhythm: 0, experimental: 1 } },
-            { label: "讲一个完整的故事，像看了一场电影", vector: { emotional: 4, skill: 0, rhythm: 0, experimental: 0 } },
-            { label: "与旋律严丝合缝，字和音完美匹配", vector: { emotional: 1, skill: 0, rhythm: 3, experimental: 0 } },
-            { label: "有态度，听完就知道你是谁", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 3 } }
+            { label: "讲一个完整的故事，像看了一场电影", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
+            { label: "与旋律严丝合缝，字和音完美匹配", vector: { emotional: 1, skill: 0, rhythm: 5, experimental: 0 } },
+            { label: "有态度，听完就知道你是谁", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 4 } }
         ] },
         { text: "爱在你的生活中更像是什么？", options: [
             { label: "像主食，每顿都要有", vector: { emotional: 5, skill: 0, rhythm: 0, experimental: 0 } },
             { label: "像调料，是生活中浓墨重彩的一笔", vector: { emotional: 3, skill: 0, rhythm: 0, experimental: 0 } },
-            { label: "像配菜，有它会丰富，没有也行", vector: { emotional: 1, skill: 0, rhythm: 0, experimental: 0 } },
-            { label: "像剩菜，有时候直接倒了", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 0 } }
+            { label: "像配菜，有它会丰富，没有也行", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 0 } },
+            { label: "像剩菜，有时候直接倒了", vector: { emotional: -1, skill: 0, rhythm: 0, experimental: 0 } }
         ] },
         { text: "你最想梦到哪个场景？", options: [
             { label: "一片永远下着雨的海边", vector: { emotional: 3, skill: 0, rhythm: 0, experimental: 0 } },
@@ -392,7 +392,7 @@
         ] }
     ];
 
-    // ======================= 歌曲数据 (根据你最新Excel内容，共47首) =======================
+    // ======================= 歌曲数据 (共47首，向量与描述与最新Excel一致) =======================
     const songs = [
         { name: "你的珍藏", emotional: 9, skill: 5, rhythm: 3, experimental: 1, desc: "你飞得很高、很远，<br>也值得一个可以永远稳稳接住你的港湾。" },
         { name: "照片", emotional: 9.5, skill: 4, rhythm: 3, experimental: 3, desc: "你拥有着值得你用一生去整理和纪念的东西。<br>这样的人，心里有一座自己的博物馆，<br>不对外开放，但永远亮着灯。" },
@@ -425,8 +425,8 @@
         { name: "纯妹妹", emotional: 0.5, skill: 8, rhythm: 10, experimental: 10, desc: "你的少女心不是还没长大，<br>而是你选择把自己养得很好。<br>这样的你，值得被世界温柔以待。" },
         { name: "向日葵朝着夜", emotional: 7, skill: 6, rhythm: 6, experimental: 8, desc: "你与这个世界周旋良久，眼神却里满是温柔。<br>你的奇怪、你的慢半拍、<br>你那些说不清的小情绪，<br>都是你最珍贵的独特之处。" },
         { name: "假如我们还爱着", emotional: 9, skill: 3, rhythm: 4, experimental: 5, desc: "时间拿不走你的真诚，只是把它藏得更深了。<br>你学会了把一段感情放进抽屉里，<br>不常打开，但你知道它在那里。" },
-        { name: "我管不住我自己", emotional: 2, skill: 6, rhythm: 9, experimental: 7, desc: "你身上有一种藏不住的可爱。<br>世界太大，但你总能找到那些亮晶晶的小东西。" },
-        { name: "有趣", emotional: 1, skill: 10, rhythm: 7, experimental: 10, desc: "你拒绝无聊。<br>人生苦短，必须加点料。<br>你把日子过成了自己的实验剧场。" },
+        { name: "我管不住我自己", emotional: 2, skill: 5, rhythm: 8, experimental: 7, desc: "你身上有一种藏不住的可爱。<br>世界太大，但你总能找到那些亮晶晶的小东西。" },
+        { name: "有趣", emotional: 1, skill: 9.5, rhythm: 7, experimental: 9.5, desc: "你拒绝无聊。<br>人生苦短，必须加点料。<br>你把日子过成了自己的实验剧场。" },
         { name: "我表示理解", emotional: 2, skill: 5, rhythm: 7, experimental: 8, desc: "你看得太清楚，所以懒得较真。<br>不解释，不辩解。<br>别人争对错的时候，你在看风景。<br>你不赶浪潮，你自己就是海。" },
         { name: "还你茉莉", emotional: 0.5, skill: 9, rhythm: 5, experimental: 10, desc: "你在有力的鼓点中俯视山川河流，<br>你坚定地张开双臂，允许一切穿过自己。<br>心中有爱，仁者无敌。" },
         { name: "多少的光阴", emotional: 9, skill: 3, rhythm: 4, experimental: 6.5, desc: "时间在你身上留下的不是痕迹，是养分。<br>这样的人像潮汐，<br>有自己的时辰，不跟着任何人的表走。" },
@@ -550,16 +550,19 @@
             }
         }
 
-        // 曼哈顿距离算法
+        // 余弦相似度（夹角）算法 —— 体现四个维度的偏好比例
         let songScores = songs.map(song => {
-            let totalDiff = Math.abs(userVector.emotional - song.emotional) +
-                            Math.abs(userVector.skill - song.skill) +
-                            Math.abs(userVector.rhythm - song.rhythm) +
-                            Math.abs(userVector.experimental - song.experimental);
-            return { song, totalDiff };
+            const dot = userVector.emotional * song.emotional +
+                        userVector.skill * song.skill +
+                        userVector.rhythm * song.rhythm +
+                        userVector.experimental * song.experimental;
+            const magUser = Math.hypot(userVector.emotional, userVector.skill, userVector.rhythm, userVector.experimental);
+            const magSong = Math.hypot(song.emotional, song.skill, song.rhythm, song.experimental);
+            const similarity = (magUser === 0 || magSong === 0) ? 0 : dot / (magUser * magSong);
+            return { song, similarity };
         });
-        songScores.sort((a, b) => a.totalDiff - b.totalDiff);
-        let bestSong = songScores[0].song;
+        songScores.sort((a, b) => b.similarity - a.similarity);
+        const bestSong = songScores[0].song;
         
         if (bestSong) reportStat(bestSong.name);
         
