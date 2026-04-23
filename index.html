@@ -310,7 +310,7 @@
 </div>
 
 <script>
-    // ======================= 统计功能配置 =======================
+    // ======================= 统计功能配置 (请替换成你自己的Web App URL) =======================
     const STATS_API_URL = 'https://script.google.com/macros/s/AKfycbwsx7mRqTTdK6NkoG35qPPvQWrki-0aUvlXmMv44BffiR-SgVg3HLwbkucpn_-ow6lf/exec';
 
     function reportStat(songName) {
@@ -320,7 +320,7 @@
             .catch(err => { console.log("统计上报失败:", err); });
     }
 
-    // ======================= 题目数据（根据最新文档） =======================
+    // ======================= 题目数据 =======================
     const questions = [
         { text: "当你听一首新歌时，你会被什么吸引？", options: [
             { label: "旋律是否流畅动听", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
@@ -396,29 +396,29 @@
         ] }
     ];
 
-    // ======================= 歌曲数据（47首，向量和描述已按最新表格更新） =======================
+    // ======================= 歌曲数据 (根据你最新的Excel内容，共47首) =======================
     const songs = [
         { name: "你的珍藏", emotional: 8, skill: 5, rhythm: 3, experimental: 3, desc: "你飞得很高、很远，<br>也值得一个可以永远稳稳接住你的港湾。" },
         { name: "照片", emotional: 9.5, skill: 4, rhythm: 3, experimental: 3, desc: "你拥有着值得你用一生去整理和纪念的东西。<br>这样的人，心里有一座自己的博物馆，<br>不对外开放，但永远亮着灯。" },
         { name: "在夜里跳舞", emotional: 8, skill: 5, rhythm: 6, experimental: 3, desc: "你太知道爱的分量。<br>你的克制不是冷淡，<br>是你把所有的热情都调成了静音。<br>这样的人，不轻易开始，<br>但开始了就不会结束。" },
-        { name: "爱我的时候（with周兴哲）", emotional: 7, skill: 3, rhythm: 5, experimental: 3, desc: "你像冬天里的一杯热可可，<br>你给的温暖，不是轰轰烈烈，是刚好。<br>刚好在需要的时候出现，刚好让人想靠近。" },
+        { name: "爱我的时候（with周兴哲）", emotional: 8.5, skill: 3, rhythm: 6, experimental: 3, desc: "你像冬天里的一杯热可可，<br>你给的温暖，不是轰轰烈烈，是刚好。<br>刚好在需要的时候出现，刚好让人想靠近。" },
         { name: "分身", emotional: 10, skill: 5, rhythm: 4, experimental: 1, desc: "你的多面性令人捉摸不透。<br>而你的每一个分身，<br>都是与周遭世界每一次交手的证据。" },
         { name: "喂", emotional: 6, skill: 6, rhythm: 8, experimental: 4, desc: "你在自己的节奏里晃，不急也不停。<br>你在混乱里找平衡，在热闹里走神。<br>那些高音不是炫技，<br>是你终于找到一个出口，<br>把憋着的那口气吐出来。" },
         { name: "续写", emotional: 9.5, skill: 5, rhythm: 3, experimental: 2.5, desc: "你不轻易说爱，但说了就不会收回。<br>你看重承诺，<br>看重那些不需要说出口也懂的时刻。" },
-        { name: "空耳", emotional: 8, skill: 2, rhythm: 4, experimental: 2, desc: "你习惯在那些无意义的日常里找线索。<br>对着空墙找回声，在沉默里找花开。<br>这样的人，有浪漫的天赋。" },
-        { name: "另一种答案", emotional: 4, skill: 5, rhythm: 6, experimental: 4, desc: "你爱人的方式，像一首温柔的R&B，<br>在纷乱的世界中保持着自己的节奏。" },
-        { name: "勇敢额度", emotional: 6, skill: 5, rhythm: 4, experimental: 2, desc: "你摔过，但每次都自己爬起来拍掉灰。<br>你比谁都清楚，那条路为什么值得走。" },
+        { name: "空耳", emotional: 9, skill: 2, rhythm: 4, experimental: 3, desc: "你习惯在那些无意义的日常里找线索。<br>对着空墙找回声，在沉默里找花开。<br>这样的人，有浪漫的天赋。" },
+        { name: "另一种答案", emotional: 4, skill: 5, rhythm: 7.5, experimental: 4, desc: "你爱人的方式，像一首温柔的R&B，<br>在纷乱的世界中保持着自己的节奏。" },
+        { name: "勇敢额度", emotional: 7.5, skill: 4, rhythm: 4, experimental: 3, desc: "你摔过，但每次都自己爬起来拍掉灰。<br>你比谁都清楚，那条路为什么值得走。" },
         { name: "Gray Turns To May", emotional: 5, skill: 2, rhythm: 8, experimental: 4, desc: "你喜欢在旋律里找缝隙，<br>塞进只有自己知道的秘密。<br>别人听歌，你听的是空白处<br>——换气的声音、进鼓前的那半秒、<br>最后一个音落下后的余震。" },
-        { name: "你好快乐", emotional: 5, skill: 4, rhythm: 7, experimental: 5, desc: "你习惯把情绪揉碎了，<br>塞进某个和弦的间隙里。<br>你把白天没说的话，<br>拧成合成器的滤波旋钮，<br>一点一点开，一点一点关。" },
+        { name: "你好快乐", emotional: 5, skill: 4, rhythm: 8, experimental: 5, desc: "你习惯把情绪揉碎了，<br>塞进某个和弦的间隙里。<br>你把白天没说的话，<br>拧成合成器的滤波旋钮，<br>一点一点开，一点一点关。" },
         { name: "雨后日记", emotional: 4, skill: 3, rhythm: 9, experimental: 3, desc: "你不着急把一切说透，<br>觉得暧昧比答案更迷人。<br>你把自己藏在语气里、藏在旋律的缝隙里、<br>藏在深夜播放列表的第六首歌里。" },
         { name: "失焦", emotional: 3, skill: 5, rhythm: 8, experimental: 5, desc: "你听的不是歌，是空气在慢慢变湿的感觉。<br>你爱的是声音里的那些缝隙<br>——气声滑过耳廓的瞬间，<br>像有人在你耳边轻轻叹了口气。<br>这样的人，不声张，<br>但靠近你的人，都会被你的频率吸住。" },
-        { name: "Forever In You", emotional: 8.5, skill: 3, rhythm: 6, experimental: 3, desc: "你的真诚不是天真，<br>是你见过复杂之后，还是选了简单。<br>这样的人，是这个时代稀缺的东西。" },
+        { name: "Forever In You", emotional: 8.5, skill: 2, rhythm: 6, experimental: 3, desc: "你的真诚不是天真，<br>是你见过复杂之后，还是选了简单。<br>这样的人，是这个时代稀缺的东西。" },
         { name: "匿名星", emotional: 3, skill: 4, rhythm: 9, experimental: 4, desc: "你不赶流行，流行会过时，<br>但你即兴的旋律不会。<br>你知道自己的价值，不需要别人的鉴定。" },
         { name: "Tell Me", emotional: 5, skill: 3, rhythm: 7, experimental: 5, desc: "你不喜欢直白的表达，觉得那样少了点韵味。<br>你习惯把话放在语气里，<br>把情绪放在呼吸里，<br>让懂的人自己听出来。" },
         { name: "热汤", emotional: 8, skill: 6, rhythm: 2, experimental: 1, desc: "你不再急着诉说过往，也不再追问为什么。<br>你飞到了远方，而那些陪你走过一段路的人，你只愿他们别来无恙。" },
         { name: "靓仔日记", emotional: 6, skill: 5, rhythm: 4, experimental: 1, desc: "你心里有一小块地方，<br>永远停留在那个夏天，<br>它提醒着你，你的青春没有结束。" },
         { name: "爱的奇幻旅行", emotional: 7, skill: 4, rhythm: 3, experimental: 2, desc: "爱对你来说不是目的地，<br>是沿途所有的天气。<br>你把世界当成一座游乐场，<br>你负责浪漫。<br>这样的人，走到哪里，哪里就是晴天。" },
-        { name: "你的世界", emotional: 6, skill: 8, rhythm: 6, experimental: 4.5, desc: "你被热爱的事填满的时候，<br>眼里的光是藏不住的。<br>好奇心推着你，翻过一座又一座山。<br>继续跑吧，前方还有没见过的日出、没吹过的晚风、没遇见的自己。" },
+        { name: "你的世界", emotional: 6, skill: 8, rhythm: 6, experimental: 4.5, desc: "你被热爱的事填满的时候，<br>眼里的光是藏不住的。<br>好奇心推着你，翻过一座又一座山。<br>继续跑吧，前方还有没见过的日出、<br>没吹过的晚风、没遇见的自己。" },
         { name: "想你时风起", emotional: 9.5, skill: 7, rhythm: 5, experimental: 1, desc: "你习惯在深夜打开一首慢歌，<br>让情绪慢慢流出来。<br>你相信有些话不必说出口，<br>风会替你送达。<br>这样的人，<br>深情但不沉重，温柔但不纠缠。" },
         { name: "Oh lala", emotional: 2, skill: 5, rhythm: 8, experimental: 6, desc: "你像一杯刚倒进冰块的气泡水，<br>不甜腻，不张扬，<br>但你出现的时候，气氛会自己亮起来。" },
         { name: "再见往事", emotional: 7, skill: 6, rhythm: 4, experimental: 4, desc: "你相信，黑夜再长，也挡不住天亮。<br>你不是在等光，你是自己提着灯往前走。" },
@@ -433,7 +433,7 @@
         { name: "有趣", emotional: 0.5, skill: 10, rhythm: 7, experimental: 10, desc: "你拒绝无聊。<br>人生苦短，必须加点料。<br>你把日子过成了自己的实验剧场。" },
         { name: "我表示理解", emotional: 2, skill: 5, rhythm: 7, experimental: 8, desc: "你看得太清楚，所以懒得较真。<br>不解释，不辩解。<br>别人争对错的时候，你在看风景。<br>你不赶浪潮，你自己就是海。" },
         { name: "还你茉莉", emotional: 0.5, skill: 9, rhythm: 5, experimental: 10, desc: "你在有力的鼓点中俯视山川河流，<br>你坚定地张开双臂，允许一切穿过自己。<br>心中有爱，仁者无敌。" },
-        { name: "多少的光阴", emotional: 9.5, skill: 3, rhythm: 4, experimental: 7, desc: "时间在你身上留下的不是痕迹，是养分。<br>这样的人像潮汐，<br>有自己的时辰，不跟着任何人的表走。" },
+        { name: "多少的光阴", emotional: 9, skill: 3, rhythm: 4, experimental: 6.5, desc: "时间在你身上留下的不是痕迹，是养分。<br>这样的人像潮汐，<br>有自己的时辰，不跟着任何人的表走。" },
         { name: "珠玉", emotional: 7, skill: 10, rhythm: 5, experimental: 10, desc: "你在世事沉浮中坚持着真实的自我。<br>千淘万洗，珠玉自现。" },
         { name: "执", emotional: 7, skill: 5, rhythm: 3.5, experimental: 3.5, desc: "你看透了因果，却还是选了那个因。<br>你清醒地固执，比盲目更难得。" },
         { name: "纯寐寐", emotional: 2.5, skill: 6, rhythm: 9, experimental: 7.5, desc: "别人在抢拍子，你在等拍子来找你。<br>慵懒的鼓点在你身边绕啊绕，<br>你躺在里面，手指跟着轻轻敲。<br>你眯着眼，世界在你面前慢慢转。" },
@@ -554,7 +554,7 @@
             }
         }
 
-        // 曼哈顿距离算法（最均衡）
+        // 曼哈顿距离算法
         let songScores = songs.map(song => {
             let totalDiff = Math.abs(userVector.emotional - song.emotional) +
                             Math.abs(userVector.skill - song.skill) +
