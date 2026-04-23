@@ -306,7 +306,7 @@
 </div>
 
 <script>
-    // ======================= 统计功能配置 (请使用您自己的Web App URL) =======================
+    // ======================= 统计功能配置 =======================
     const STATS_API_URL = 'https://script.google.com/macros/s/AKfycbwsx7mRqTTdK6NkoG35qPPvQWrki-0aUvlXmMv44BffiR-SgVg3HLwbkucpn_-ow6lf/exec';
 
     function reportStat(songName) {
@@ -316,7 +316,7 @@
             .catch(err => { console.log("统计上报失败:", err); });
     }
 
-    // ======================= 题目数据 =======================
+    // ======================= 题目数据（根据最新文档） =======================
     const questions = [
         { text: "当你听一首新歌时，你会被什么吸引？", options: [
             { label: "旋律是否流畅动听", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
@@ -328,7 +328,7 @@
             { label: "一只在窗台上看雨的猫", vector: { emotional: 4, skill: 0, rhythm: 0, experimental: 0 } },
             { label: "一只跟着音乐轻轻扇动翅膀的蝴蝶", vector: { emotional: 0, skill: 0, rhythm: 4, experimental: 0 } },
             { label: "一只没人见过的外星生物", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 4 } },
-            { label: "一只突然飞起、惊动整片树林的鸟", vector: { emotional: 0, skill: 4, rhythm: 0, experimental: 0 } }
+            { label: "一只让整座森林都抬起头仰望的飞鸟", vector: { emotional: 0, skill: 4, rhythm: 0, experimental: 0 } }
         ] },
         { text: "你更愿意进行什么样的旅行？", options: [
             { label: "有烟火气的小城，随便走走就很舒服", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
@@ -357,7 +357,7 @@
         { text: "你更喜欢哪种声音质感？", options: [
             { label: "温暖贴耳、富含中高频的气声", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
             { label: "金属质感的共鸣，像敲击银器", vector: { emotional: 0, skill: 2, rhythm: 0, experimental: 0 } },
-            { label: "丝绸滑动般的柔软", vector: { emotional: 0, skill: 0, rhythm: 2, experimental: 0 } },
+            { label: "丝绸滑动般柔软的声音", vector: { emotional: 0, skill: 0, rhythm: 2, experimental: 0 } },
             { label: "黑暗中合成器滑过的荧光色的尾音", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 2 } }
         ] },
         { text: "你觉得歌词最重要的是什么？", options: [
@@ -369,8 +369,8 @@
         { text: "爱在你的生活中更像是什么？", options: [
             { label: "像主食，每顿都要有", vector: { emotional: 5, skill: 0, rhythm: 0, experimental: 0 } },
             { label: "像调料，是生活中浓墨重彩的一笔", vector: { emotional: 3, skill: 0, rhythm: 0, experimental: 0 } },
-            { label: "像配菜，有它会丰富，没有也行", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 0 } },
-            { label: "像剩菜，有时候直接倒了", vector: { emotional: -1, skill: 0, rhythm: 0, experimental: 0 } }
+            { label: "像配菜，有它会丰富，没有也行", vector: { emotional: 0, skill: 0, rhythm: 1, experimental: 0 } },
+            { label: "像剩菜，有时候直接倒了", vector: { emotional: -1, skill: 0, rhythm: 2, experimental: 0 } }
         ] },
         { text: "你最想梦到哪个场景？", options: [
             { label: "一片永远下着雨的海边", vector: { emotional: 3, skill: 0, rhythm: 0, experimental: 0 } },
@@ -381,14 +381,14 @@
         { text: "难过的时候，你通常会？", options: [
             { label: "一个人待着，慢慢消化", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
             { label: "做点别的事情转移注意力", vector: { emotional: 0, skill: 2, rhythm: 0, experimental: 0 } },
-            { label: "听歌，随着音乐舞动", vector: { emotional: 0, skill: 0, rhythm: 2, experimental: 0 } },
+            { label: "听歌，随着音乐舞动", vector: { emotional: 0, skill: 0, rhythm: 3, experimental: 0 } },
             { label: "写点东西或者做点创作", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 2 } }
         ] },
         { text: "你更希望别人记住你什么？", options: [
-            { label: "曾经在某个人最难的时候陪过他", vector: { emotional: 5, skill: 0, rhythm: 0, experimental: 0 } },
+            { label: "曾经在ta最难的时候陪过ta", vector: { emotional: 5, skill: 0, rhythm: 0, experimental: 0 } },
             { label: "说不清道不明、但让人忘不掉的气质", vector: { emotional: 0, skill: 0, rhythm: 0, experimental: 5 } },
             { label: "才华让人惊艳的那个瞬间", vector: { emotional: 0, skill: 5, rhythm: 0, experimental: 0 } },
-            { label: "身上那种让人放松的氛围", vector: { emotional: 0, skill: 0, rhythm: 5, experimental: 0 } }
+            { label: "那种让人不自觉想要靠近的吸引力", vector: { emotional: 0, skill: 0, rhythm: 5, experimental: 0 } }
         ] }
     ];
 
@@ -399,14 +399,14 @@
         { name: "在夜里跳舞", emotional: 8, skill: 5, rhythm: 6, experimental: 3, desc: "你太知道爱的分量。<br>你的克制不是冷淡，<br>是你把所有的热情都调成了静音。<br>这样的人，不轻易开始，<br>但开始了就不会结束。" },
         { name: "爱我的时候（with周兴哲）", emotional: 9, skill: 4, rhythm: 6, experimental: 2, desc: "你像冬天里的一杯热可可，<br>你给的温暖，不是轰轰烈烈，是刚好。<br>刚好在需要的时候出现，刚好让人想靠近。" },
         { name: "分身", emotional: 9, skill: 5, rhythm: 4, experimental: 1, desc: "你的多面性令人捉摸不透。<br>而你的每一个分身，<br>都是与周遭世界每一次交手的证据。" },
-        { name: "喂", emotional: 6, skill: 6, rhythm: 8, experimental: 4, desc: "你在自己的节奏里晃，不急也不停。<br>你在混乱里找平衡，在热闹里走神。<br>那些高音不是炫技，<br>是你终于找到一个出口，<br>把憋着的那口气吐出来。" },
+        { name: "喂", emotional: 6, skill: 6, rhythm: 8, experimental: 4, desc: "你在自己的节奏里舞动，不急也不停。<br>你在混乱里找平衡，在热闹里走神。<br>那些高音不是炫技，<br>是你终于找到一个出口，<br>把憋着的那口气吐出来。" },
         { name: "续写", emotional: 9.5, skill: 5, rhythm: 3, experimental: 2.5, desc: "你不轻易说爱，但说了就不会收回。<br>你看重承诺，<br>看重那些不需要说出口也懂的时刻。" },
         { name: "空耳", emotional: 8, skill: 2, rhythm: 6, experimental: 2, desc: "你习惯在那些无意义的日常里找线索。<br>对着空墙找回声，在沉默里找花开。<br>这样的人，有浪漫的天赋。" },
         { name: "另一种答案", emotional: 5, skill: 3, rhythm: 7.5, experimental: 4, desc: "你爱人的方式，像一首温柔的R&B，<br>在纷乱的世界中保持着自己的节奏。" },
         { name: "勇敢额度", emotional: 9, skill: 4, rhythm: 4, experimental: 1, desc: "你摔过，但每次都自己爬起来拍掉灰。<br>你比谁都清楚，那条路为什么值得走。" },
         { name: "Gray Turns To May", emotional: 5, skill: 2, rhythm: 8, experimental: 4, desc: "你喜欢在旋律里找缝隙，<br>塞进只有自己知道的秘密。<br>别人听歌，你听的是空白处<br>——换气的声音、进鼓前的那半秒、<br>最后一个音落下后的余震。" },
         { name: "你好快乐", emotional: 5, skill: 5, rhythm: 8, experimental: 4, desc: "你习惯把情绪揉碎了，<br>塞进某个和弦的间隙里。<br>你把白天没说的话，<br>拧成合成器的滤波旋钮，<br>一点一点开，一点一点关。" },
-        { name: "雨后日记", emotional: 4, skill: 3, rhythm: 9, experimental: 3, desc: "你不着急把一切说透，<br>觉得暧昧比答案更迷人。<br>你把自己藏在语气里、藏在旋律的缝隙里、<br>藏在深夜播放列表的第六首歌里。" },
+        { name: "雨后日记", emotional: 4, skill: 3, rhythm: 9, experimental: 3, desc: "你不着急把一切说透，<br>觉得暧昧比答案更迷人。<br>你把自己藏在语气里、<br>藏在旋律的缝隙里、<br>藏在深夜播放列表的第六首歌里。" },
         { name: "失焦", emotional: 3, skill: 5, rhythm: 8, experimental: 5, desc: "你听的不是歌，是空气在慢慢变湿的感觉。<br>你爱的是声音里的那些缝隙<br>——气声滑过耳廓的瞬间，<br>像有人在你耳边轻轻叹了口气。<br>这样的人，不张扬，<br>但靠近你的人，都会被你的频率吸住。" },
         { name: "Forever In You", emotional: 8.5, skill: 2, rhythm: 6, experimental: 3, desc: "你的真诚不是天真，<br>是你见过复杂之后，还是选了简单。<br>这样的人，是这个时代稀缺的东西。" },
         { name: "匿名星", emotional: 3, skill: 4, rhythm: 9, experimental: 4, desc: "你不赶流行，流行会过时，<br>但你即兴的旋律不会。<br>你知道自己的价值，不需要别人的鉴定。" },
@@ -436,7 +436,7 @@
         { name: "光波", emotional: 6, skill: 5, rhythm: 7, experimental: 6, desc: "你不是在破碎，你是在蜕壳。<br>壳裂开的时候，光才能照进来。" },
         { name: "君", emotional: 10, skill: 7, rhythm: 4, experimental: 1, desc: "你的成熟超越了年龄。<br>你的安静不是冷漠，<br>是你已经不需要用喧哗来证明自己存在。" },
         { name: "明知故问（with张靓颖）", emotional: 6, skill: 9, rhythm: 7, experimental: 2, desc: "你心里有一片无人抵达的旷野，<br>只有最强韧的声音才能把它填满。<br>你的情绪阈值比别人高，不是因为冷漠，<br>是因为你见过真正的排山倒海，<br>便不再为小风小浪动容。" },
-        { name: "4ever in U", emotional: 1, skill: 3, rhythm: 9, experimental: 6, desc: "你的脚步踩着鼓点的缝隙，不快不慢，刚好让自己开心。<br>像一阵自由的风，吹到哪儿都带着轻快的节奏。<br>你活着，不是来适应的，是来尽兴的。" },
+        { name: "4ever in U", emotional: 1, skill: 3, rhythm: 9, experimental: 6, desc: "你的脚步踩着鼓点的缝隙，<br>不快不慢，刚好让自己开心。<br>像一阵自由的风，吹到哪儿都带着轻快的节奏。<br>你活着，不是来适应的，是来尽兴的。" },
         { name: "落笔成书", emotional: 10, skill: 6, rhythm: 4, experimental: 1, desc: "你像一本写满批注的书，边角折了又折。<br>你的敏感不是负担，是你对生活最深的理解。" },
         { name: "TENDER", emotional: 2, skill: 8, rhythm: 9, experimental: 5, desc: "对待感情，<br>你知道什么时候该靠近，什么时候该退半步，<br>把暧昧的节奏拿捏得像鼓点一样准。" },
         { name: "终身孤独", emotional: 8, skill: 8, rhythm: 3, experimental: 2, desc: "你不是孤独，你只是在自己的频率上。<br>你不羡慕别人的热闹，<br>就像深海不羡慕岸上的喧嚣。" },
