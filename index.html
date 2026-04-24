@@ -306,7 +306,7 @@
 </div>
 
 <script>
-    // ======================= 统计功能配置 (请使用您自己的Web App URL) =======================
+    // ======================= 统计功能配置 =======================
     const STATS_API_URL = 'https://script.google.com/macros/s/AKfycbwsx7mRqTTdK6NkoG35qPPvQWrki-0aUvlXmMv44BffiR-SgVg3HLwbkucpn_-ow6lf/exec';
 
     function reportStat(songName) {
@@ -316,7 +316,7 @@
             .catch(err => { console.log("统计上报失败:", err); });
     }
 
-    // ======================= 题目数据（根据最新文档） =======================
+    // ======================= 题目数据 =======================
     const questions = [
         { text: "当你听一首新歌时，你会被什么吸引？", options: [
             { label: "旋律是否流畅动听", vector: { emotional: 2, skill: 0, rhythm: 0, experimental: 0 } },
@@ -392,10 +392,10 @@
         ] }
     ];
 
-    // ======================= 歌曲数据 (根据最新Excel，共47首) =======================
+    // ======================= 歌曲数据 (共47首) =======================
     const songs = [
         { name: "你的珍藏", emotional: 9, skill: 5, rhythm: 3, experimental: 1, desc: "你飞得很高、很远，<br>也值得一个可以永远稳稳接住你的港湾。" },
-        { name: "照片", emotional: 9.5, skill: 4, rhythm: 3, experimental: 3, desc: "你拥有着值得用一生去整理和纪念的东西。<br>这样的人，心里有一座自己的博物馆，<br>不对外开放，但永远亮着灯。" },
+        { name: "照片", emotional: 9.5, skill: 4, rhythm: 3, experimental: 3, desc: "你拥有值得用一生去整理和纪念的东西。<br>这样的人，心里有一座自己的博物馆，<br>不对外开放，但永远亮着灯。" },
         { name: "在夜里跳舞", emotional: 8, skill: 5, rhythm: 6, experimental: 3, desc: "你太知道爱的分量。<br>你的克制不是冷淡，<br>是你把所有的热情都调成了静音。<br>这样的人，不轻易开始，<br>但开始了就不会结束。" },
         { name: "爱我的时候（with周兴哲）", emotional: 9, skill: 4, rhythm: 6, experimental: 2, desc: "你像冬天里的一杯热可可，<br>你给的温暖，不是轰轰烈烈，是刚好。<br>刚好在需要的时候出现，<br>刚好让人想靠近。" },
         { name: "分身", emotional: 9, skill: 5, rhythm: 4, experimental: 1, desc: "你的多面性令人捉摸不透。<br>而你的每一个分身，<br>都是与周遭世界每一次交手的证据。" },
@@ -421,11 +421,11 @@
         { name: "爱里", emotional: 10, skill: 6, rhythm: 5, experimental: 2, desc: "你是那种让人忍不住想要靠近的人，<br>你的温柔不是刻意，是你本来就如此。" },
         { name: "奇观", emotional: 8, skill: 6, rhythm: 6, experimental: 7, desc: "你神秘、迷人，<br>对别人有种说不清的引力。<br>你的独特不是精心设计的，<br>是你本来就长这样。" },
         { name: "七彩光", emotional: 7.5, skill: 3, rhythm: 5, experimental: 6, desc: "你复杂、迷人、让人想驻足了解。<br>靠近你，像是走进一场半梦半醒的幻觉<br>——说不清哪里特别，但就是忘不掉。" },
-        { name: "还有什么更好的", emotional: 1, skill: 7, rhythm: 8, experimental: 8, desc: "世界刚打开，阳光正正好。<br>你心里还住着一个会为小事雀跃的小女孩。<br>这样的人，走到哪里都能捡到糖。" },
+        { name: "还有什么更好的", emotional: 1, skill: 7, rhythm: 8, experimental: 8, desc: "世界刚打开，阳光正正好。<br>你心里住着一个会为小事雀跃的小女孩。<br>这样的人，走到哪里都能捡到糖。" },
         { name: "纯妹妹", emotional: 0.5, skill: 8, rhythm: 10, experimental: 10, desc: "你的少女心不是还没长大，<br>而是你选择把自己养得很好。<br>这样的你，值得被世界温柔以待。" },
-        { name: "向日葵朝着夜", emotional: 7, skill: 6, rhythm: 6, experimental: 8, desc: "你与这个世界周旋良久，眼神却里满是温柔。<br>你的奇怪、你的慢半拍、<br>你那些说不清的小情绪，<br>都是你最珍贵的独特之处。" },
-        { name: "假如我们还爱着", emotional: 9, skill: 3, rhythm: 4, experimental: 5, desc: "时间拿不走你的真诚，只是把它藏得更深了。<br>你学会了把一段感情放进抽屉里，<br>不常打开，但你知道它在那里。" },
-        { name: "我管不住我自己", emotional: 3, skill: 5.5, rhythm: 8.5, experimental: 7, desc: "你身上有一种藏不住的可爱。<br>世界太大，但你总能找到那些亮晶晶的小东西。" },
+        { name: "向日葵朝着夜", emotional: 7, skill: 6, rhythm: 6, experimental: 8, desc: "你与这个世界周旋良久，<br>眼神却里满是温柔。<br>你的奇怪、你的慢半拍、<br>你那些说不清的小情绪，<br>都是你最珍贵的独特之处。" },
+        { name: "假如我们还爱着", emotional: 9, skill: 3, rhythm: 4, experimental: 5, desc: "时间拿不走你的真诚，<br>只是把它藏得更深了。<br>你学会了把一段感情放进抽屉里，<br>不常打开，但你知道它在那里。" },
+        { name: "我管不住我自己", emotional: 3, skill: 5.5, rhythm: 8.5, experimental: 7, desc: "你身上有一种藏不住的可爱。<br>世界太大，<br>但你总能找到那些亮晶晶的小东西。" },
         { name: "有趣", emotional: 1, skill: 9, rhythm: 6, experimental: 10, desc: "你拒绝无聊。<br>人生苦短，必须加点料。<br>你把日子过成了自己的实验剧场。" },
         { name: "我表示理解", emotional: 2, skill: 5, rhythm: 7, experimental: 8, desc: "你看得太清楚，所以懒得较真。<br>不解释，不辩解。<br>别人争对错的时候，你在看风景。<br>你不赶浪潮，你自己就是海。" },
         { name: "还你茉莉", emotional: 0.5, skill: 9, rhythm: 5, experimental: 10, desc: "你在有力的鼓点中俯视山川河流，<br>你坚定地张开双臂，允许一切穿过自己。<br>心中有爱，仁者无敌。" },
@@ -438,7 +438,7 @@
         { name: "明知故问（with张靓颖）", emotional: 6, skill: 9, rhythm: 7, experimental: 2, desc: "你心里有一片无人抵达的旷野，<br>只有最强韧的声音才能把它填满。<br>你的情绪阈值比别人高，<br>不是因为冷漠，<br>是因为你见过真正的排山倒海，<br>便不再为小风小浪动容。" },
         { name: "4ever in U", emotional: 1, skill: 3, rhythm: 9, experimental: 6, desc: "你的脚步踩着鼓点的缝隙，<br>不快不慢，刚好让自己开心。<br>像一阵自由的风，<br>吹到哪儿都带着轻快的节奏。<br>你活着，不是来适应的，是来尽兴的。" },
         { name: "落笔成书", emotional: 10, skill: 6, rhythm: 4, experimental: 1, desc: "你像一本写满批注的书，<br>边角折了又折。<br>你的敏感不是负担，<br>是你对生活最深的理解。" },
-        { name: "TENDER", emotional: 2, skill: 8, rhythm: 9, experimental: 5, desc: "对待感情，<br>你知道什么时候该靠近，什么时候该退半步，<br>把暧昧的节奏拿捏得像鼓点一样准。" },
+        { name: "TENDER", emotional: 2, skill: 8, rhythm: 9, experimental: 5, desc: "对待感情，<br>你知道什么时候该靠近，<br>什么时候该退半步，<br>把暧昧的节奏拿捏得像鼓点一样准。" },
         { name: "终身孤独", emotional: 8, skill: 8, rhythm: 3, experimental: 2, desc: "你不是孤独，你只是在自己的频率上。<br>你不羡慕别人的热闹，<br>就像深海不羡慕岸上的喧嚣。" },
         { name: "太阳公主", emotional: 5, skill: 10, rhythm: 5, experimental: 9, desc: "你坚韧不拔，无惧逆流，<br>你热烈的生命能够燃烧出耀眼的光茫。" }
     ];
@@ -550,7 +550,7 @@
             }
         }
 
-        // 余弦相似度（夹角）算法 —— 体现四个维度的偏好比例
+        // 余弦相似度（夹角）算法
         let songScores = songs.map(song => {
             const dot = userVector.emotional * song.emotional +
                         userVector.skill * song.skill +
